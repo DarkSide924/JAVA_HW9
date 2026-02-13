@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class RadioTest {
 
     @Test
-    public void insideZoomRangeRadioStation() {
+    public void insideZoomRangeRadioStation() { //Проверка значений при преключения вперед станций внутри диапазона
         Radio radio = new Radio();
 
         radio.setCurrentRadioStation(1);
@@ -20,7 +20,7 @@ class RadioTest {
     }
 
     @Test
-    public void outZoomRangeRadioStation() {
+    public void outZoomRangeRadioStation() { //Проверка значений при преключения вперед станций вне диапазона
         Radio radio = new Radio();
 
         radio.setCurrentRadioStation(9);
@@ -34,7 +34,7 @@ class RadioTest {
     }
 
     @Test
-    public void outZoomRangeVolume() {
+    public void outZoomRangeVolume() {//Проверка значений увелечения громкости вне диапазона
         Radio radio = new Radio();
 
         radio.setCurrentVolume(100);
@@ -48,7 +48,7 @@ class RadioTest {
     }
 
     @Test
-    public void insideZoomRangeVolume() {
+    public void insideZoomRangeVolume() {//Проверка значений увелечения громкости внутри диапазона
         Radio radio = new Radio();
 
         radio.setCurrentVolume(56);
@@ -62,7 +62,7 @@ class RadioTest {
     }
 
     @Test
-    public void insideZoomReductionVolume() {
+    public void insideZoomReductionVolume() {//Проверка значений уменьшения громкости внутри диапазона
         Radio radio = new Radio();
 
         radio.setCurrentVolume(88);
@@ -76,7 +76,7 @@ class RadioTest {
     }
 
     @Test
-    public void outZoomReductionVolume() {
+    public void outZoomReductionVolume() {//Проверка значений уменьшения громкости вне диапазона
         Radio radio = new Radio();
 
         radio.setCurrentVolume(0);
@@ -90,7 +90,7 @@ class RadioTest {
     }
 
     @Test
-    public void insideZoomReductionRadioStation() {
+    public void insideZoomReductionRadioStation() {//Проверка значений при преключения назад станций внутри диапазона
         Radio radio = new Radio();
 
         radio.setCurrentRadioStation(8);
@@ -104,7 +104,7 @@ class RadioTest {
     }
 
     @Test
-    public void OutZoomReductionRadioStation() {
+    public void OutZoomReductionRadioStation() {//Проверка значений при преключения назад станций вне диапазона
         Radio radio = new Radio();
 
         radio.setCurrentRadioStation(0);
