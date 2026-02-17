@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test;
 
 class RadioTest {
 
+
     @Test
     public void insideZoomRangeRadioStation() { //Проверка значений при преключения вперед станций внутри диапазона
-        Radio radio = new Radio();
+        Radio radio = new Radio(8);
 
         radio.setCurrentRadioStation(1);
 
@@ -21,9 +22,9 @@ class RadioTest {
 
     @Test
     public void outZoomRangeRadioStation() { //Проверка значений при преключения вперед станций вне диапазона
-        Radio radio = new Radio();
+        Radio radio = new Radio(8);
 
-        radio.setCurrentRadioStation(9);
+        radio.setCurrentRadioStation(radio.getMaxRadioStation());
 
         radio.next();
 
@@ -91,9 +92,23 @@ class RadioTest {
 
     @Test
     public void insideZoomReductionRadioStation() {//Проверка значений при преключения назад станций внутри диапазона
-        Radio radio = new Radio();
+        Radio radio = new Radio(8);
 
-        radio.setCurrentRadioStation(8);
+        radio.setCurrentRadioStation(7);
+
+        radio.back();
+
+        int expected = 6;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void OutZoomReductionRadioStation() {//Проверка значений при преключения назад станций вне диапазона
+        Radio radio = new Radio(8);
+
+        radio.setCurrentRadioStation(0);
 
         radio.back();
 
@@ -104,58 +119,35 @@ class RadioTest {
     }
 
     @Test
-    public void OutZoomReductionRadioStation() {//Проверка значений при преключения назад станций вне диапазона
-        Radio radio = new Radio();
+    public void shouldSetRadioStationGreaterMax() {
+        Radio radio = new Radio(8);
 
-        radio.setCurrentRadioStation(0);
+        radio.setCurrentRadioStation(radio.getMaxRadioStation() + 1);
 
-        radio.back();
-
-        int expected = 9;
-        int actual = radio.getCurrentRadioStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, radio.getCurrentRadioStation());
     }
 
     @Test
-    public void shouldSetRadioStationGreater9() {
-        Radio radio = new Radio();
+    public void shouldSetRadioStationEqualMax() {
+        Radio radio = new Radio(8);
 
-        radio.setCurrentRadioStation(10);
+        radio.setCurrentRadioStation(radio.getMaxRadioStation());
 
-        int expected = 0;
-        int actual = radio.getCurrentRadioStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(radio.getMaxRadioStation(), radio.getCurrentRadioStation());
     }
 
     @Test
-    public void shouldSetRadioStation2Equal9() {
-        Radio radio = new Radio();
+    public void shouldSetRadioStationLessMax() {
+        Radio radio = new Radio(8);
 
-        radio.setCurrentRadioStation(9);
+        radio.setCurrentRadioStation(radio.getMaxRadioStation() - 1);
 
-        int expected = 9;
-        int actual = radio.getCurrentRadioStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(radio.getMaxRadioStation() - 1, radio.getCurrentRadioStation());
     }
 
     @Test
-    public void shouldSetRadioStationLess9() {
-        Radio radio = new Radio();
-
-        radio.setCurrentRadioStation(8);
-
-        int expected = 8;
-        int actual = radio.getCurrentRadioStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetRadioStationLess0() {
-        Radio radio = new Radio();
+    public void shouldSetRadioStationLessMin() {
+        Radio radio = new Radio(8);
 
         radio.setCurrentRadioStation(-1);
 
@@ -166,8 +158,8 @@ class RadioTest {
     }
 
     @Test
-    public void shouldSetRadioStationEqual0() {
-        Radio radio = new Radio();
+    public void shouldSetRadioStationEqualMin() {
+        Radio radio = new Radio(8);
 
         radio.setCurrentRadioStation(0);
 
@@ -178,8 +170,8 @@ class RadioTest {
     }
 
     @Test
-    public void shouldSetRadioStationGreater0() {
-        Radio radio = new Radio();
+    public void shouldSetRadioStationGreaterMin() {
+        Radio radio = new Radio(8);
 
         radio.setCurrentRadioStation(1);
 
